@@ -27,6 +27,16 @@ module.exports = {
           //babel-loader它就是依靠这些插件去解析的
           options: {
             presets: ["@babel/preset-env"],
+            // 按需引入
+            plugins: [
+              [
+                "component",
+                {
+                  libraryName: "element-ui",
+                  styleLibraryName: "theme-chalk",
+                },
+              ],
+            ],
           },
         },
       },
@@ -53,6 +63,11 @@ module.exports = {
       {
         test: /\.vue$/,
         loader: "vue-loader",
+      },
+      // 配置loader处理字体图标
+      {
+        test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
+        loader: "file-loader",
       },
     ],
   },
@@ -81,6 +96,13 @@ module.exports = {
     port: 8000, //服务启动的端口
     open: true, //是否自动打开浏览器
     quiet: true, //输出少量的提示信息
+    proxy: {
+      "/api": {
+        target: "http://localhost:4000",
+        pathRewrite: { "^/api": "" },
+        changeOrigin: true, // 支持跨域，如果协议/主机也不相同，必须加上
+      },
+    },
   },
 
   devtool: "cheap-module-eval-source-map", //定位出错所在的原始代码行

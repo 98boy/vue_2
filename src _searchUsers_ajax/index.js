@@ -1,6 +1,6 @@
 import Vue from "vue";
 import App from "@/App";
-import store from "@/vuex/store";
+// import "@babel/polyfill";
 new Vue({
   beforeCreate() {
     // 全局事件总线
@@ -8,5 +8,4 @@ new Vue({
   },
   el: "#root",
   render: (h) => h(App),
-  store,
 });

@@ -13,32 +13,31 @@
 </template>
 
 <script type="text/ecmascript-6">
-import { mapGetters } from "vuex";
+// 导入axios
+import axios from "axios";
+// 导入vue-resource
+import VueResource from "vue-resource";
+import Vue from "vue";
+// 声明使用插件
+Vue.use(VueResource);
 export default {
-  // computed: {
-  //   ...mapGetters(["isLoading", "isFirst", "errMsg", "users"])
-  // },
-  // 上面的简写
-  computed: mapGetters(["isLoading", "isFirst", "errMsg", "users"]),
-
   mounted() {
     // 绑定异步操作
 
     this.$bus.$on("searchAjax", this.searchAjax);
   },
-
-  // data() {
-  //   return {
-  // 第一次显示页面
-  // isFirst: true,
-  // // 正在发送请求
-  // isLoading: false,
-  // // 出错后保存的信息
-  // errMsg: "",
-  // // 成功后保存的信息
-  // users: []
-  //   };
-  // },
+  data() {
+    return {
+      // 第一次显示页面
+      isFirst: true,
+      // 正在发送请求
+      isLoading: false,
+      // 出错后保存的信息
+      errMsg: "",
+      // 成功后保存的信息
+      users: []
+    };
+  },
   methods: {
     // axios使用
     // searchAjax(searchName) {
